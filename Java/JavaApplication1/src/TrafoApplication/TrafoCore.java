@@ -26,7 +26,7 @@ public class TrafoCore {
     {
         String path = "";
         try{
-            path = new File("C:\\Users\\Torbjörn\\Documents\\Prolog").getCanonicalPath(); //".").getCanonicalPath();
+            path = new File("C:\\Git\\Trafo\\Prolog").getCanonicalPath(); //".").getCanonicalPath();
         }
         catch(Exception ex){}
         

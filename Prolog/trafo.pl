@@ -13,6 +13,10 @@ A = [nohit:"AT", verb:"dog", nohit:"AB", verb:"cat"],
 R = [] .
 */
 
+dump_rules :-
+	retractall(db(_,_)),
+	retractall(rule(_,_)).
+	
 :- op(600,xfy,::).
 
 
