@@ -1,5 +1,10 @@
 % try to solve - otherwise collect until match found, and repeat
 
+:- multifile rule/2.
+:- dynamic rule/2.
+:- multifile output/2.
+:- dynamic output/2.
+
 /* YÄSSSS!!
 [debug]  ?- string_codes("TAdogBAcat",String),trawl(verb,A,String,R,[]),print(A).
 [nohit:"AT",verb:"dog",nohit:"AB",verb:"cat"]
@@ -62,6 +67,9 @@ transformRule([try(TryParts)|Parts],Data,Out):-
 	transformRule(Parts, Data, PrevOut).
 transformRule([get(_Rule::Object,TagName,TagValue)|Parts],Data,PrevOut):-
 	member(TagName:TagValue,Object),!,
+	transformRule(Parts, Data, PrevOut).
+transformRule([get(ObjectList,TagName,TagValue)|Parts],Data,PrevOut):-
+	member(TagName:TagValue,ObjectList),!,
 	transformRule(Parts, Data, PrevOut).
 transformRule([Part|Parts],Data,[Out|PrevOut]):-					% is Part the name of a tag i Data?
 	member(Part:Value, Data),!,
@@ -227,8 +235,13 @@ solve([Part|Rest],[Answer|PrevAnswer],Input,RestOut):-
 
 	
 % --- solve labeled part	
-solve(Label:Rule, Label:Answer, Input, Rest):-
-	!,solve_rule(Rule,Answer,Input,Rest).
+solve(Label:Rule, Label:AnswerOut, Input, Rest):-
+	!,solve_rule(Rule,Answer,Input,Rest),
+	(
+		Answer = L2:A2,!,AnswerOut = L2:[A2]	% label1:label2: --> label1:[label2:..]
+		;
+		AnswerOut = Answer
+	).
 	
 /*
 % --- solve labeled part	
@@ -241,7 +254,9 @@ solve(Rule, Answer, Input, Rest):-
 	!,solve_rule(Rule,Answer,Input,Rest).
 
 	
-	
+match([],In,In).
+match([FT|RT],[FT|IR],Final):-
+	match(RT,IR,Final).	
 	
 	
 
@@ -259,7 +274,7 @@ solve_rule(db_match-Name, Match, Input, Out):-
 solve_rule(seq(Min,Max,X),Answer,Input,Rest):-
 	sequence(X,Min,Max,0,Answer,Input,Rest).
 % pröva olika alternativ
-solve_rule(any(Alternatives), Answer, Input, Rest):-
+solve_rule(any(Alternatives), [Answer], Input, Rest):-
 	member(ToTry,Alternatives),
 	solve(ToTry,Answer,Input,Rest),!.
 % negera
@@ -345,7 +360,7 @@ resolve_body(Name, db_match, Match, Input, Out):-
 	*/
 	
 	
-
+/*
 smatch(MatchString,In,Out):-
 	string_codes(MatchString, MatchCodes),
 	match(MatchCodes,In,Out).
@@ -366,8 +381,6 @@ db(verb,"dog").
 db(substantive,"shit").
 db(substantive,"smell").
 
-:- multifile rule/2.
-:- dynamic rule/2.
 
 rule(test,[any([verb, " ", substantive])]).
 rule(sentences, [sentence,seq(0,99," ")]).
@@ -376,10 +389,10 @@ rule(verb, db_match-verb).
 rule(substantive, db_match-substantive).
 rule(b, blanks:seq(1,99,any([" ","\t","\n"]))).
 % rule(moment,[neg:not("."),hit:"Moment"]).
+*/
 
-:- multifile output/2.
-:- dynamic output/2.
 
+/*
 
 % hitta regel som finns i rule/1
 resolve_rule(Name, Answer, Input, Rest):-
@@ -430,5 +443,5 @@ match_sequence(What,Min,Max,CurrCount,[Answer|PrevAnswer],Input,Rest):-
 		
 match_sequence(_What,Min,_Max,CurrCount,[],Rest,Rest):-
 	CurrCount >= Min.
-
+*/
 	

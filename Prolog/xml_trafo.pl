@@ -60,6 +60,7 @@ output(tag,[
 		get(Start,children,Children),
 		Children]),
 	get(contents,C),
+	%C,
 	try([get(C,text,Text),start_tag::[name:"original"],Text,end_tag::[name:"original"]]),
 	try([get(C,children,Subtags),Subtags]),
 	end
