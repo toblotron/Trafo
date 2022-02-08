@@ -1,5 +1,3 @@
-% XML-parsing
-
 rule(b, 
 	blanks:seq(1,99,any([" ","\t","\n"]))).
 
