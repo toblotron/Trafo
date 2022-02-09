@@ -46,3 +46,4 @@ var pl;
         new pl.type.Module( name, predicates(), exports );
     }
 })( pl );
+var testeval = "hupp";
