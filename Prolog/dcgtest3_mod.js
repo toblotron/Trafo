@@ -15,9 +15,9 @@ var options = {
 if( typeof module !== 'undefined' ) {
 	module.exports = function(tau_prolog) {
 		pl = tau_prolog;
-		new pl.type.Module( name, predicates(), exports );
+		new pl.type.Module( name, predicates(), exports, { dependencies: ['lists'] } );
 	};
 } else {
-	new pl.type.Module( name, predicates(), exports );
+	new pl.type.Module( name, predicates(), exports, { dependencies: ['lists'] } );
 }
 })( pl );
