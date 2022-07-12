@@ -345,13 +345,17 @@ var pl
         )
       ]
     }
-
-    // Export everything
-    var exports = Object.keys(predicates)
-
     return { predicates, exports }
   }
 
+  
+  // List of predicates exported by the module
+    var exports = [
+        "digit/3",
+        "memberchk/2",
+        "code_type/2"
+    ];
+    
   // DON'T EDIT
   if (typeof module !== 'undefined') {
     module.exports = function (tau_prolog) {
