@@ -1,7 +1,7 @@
 var pl;
 (function( pl ) {
     // Name of the module
-    var name = "my_module";
+    var name = 'my_module';
     // Object with the set of predicates, indexed by indicators (name/arity)
     var predicates = function() {
         return {
