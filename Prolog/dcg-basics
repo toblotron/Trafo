@@ -357,13 +357,13 @@ var pl;
         "code_type/2"
     ];
     
- // DON'T EDIT
-    if( typeof module !== 'undefined' ) {
-        module.exports = function(tau_prolog) {
-            pl = tau_prolog;
-            new pl.type.Module( name, predicates(), exports );
-        };
-    } else {
-        new pl.type.Module( name, predicates(), exports ); 
-    }
+  // DON'T EDIT
+  if( typeof module !== 'undefined' ) {
+    module.exports = function(tau_prolog) {
+        pl = tau_prolog;
+        new pl.type.Module( name, predicates(), exports );
+    };
+} else {
+    new pl.type.Module( name, predicates(), exports );
+}
 })(pl)
