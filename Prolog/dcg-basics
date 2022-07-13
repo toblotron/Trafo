@@ -364,6 +364,6 @@ var pl;
             new pl.type.Module( name, predicates(), exports );
         };
     } else {
-        new pl.type.Module( name, predicates(), exports );
+        new pl.type.Module( name, predicates(), exports ); 
     }
 })(pl)
