@@ -3,9 +3,10 @@ var pl;
     // Name of the module
   var name = "dcg_basics"
 
-  var code = () => {
+  
     // Compiled using build.js
-    var predicates = {
+    var predicates = function() {
+        return {
       "memberchk/2": [
         new pl.type.Rule(
           new pl.type.Term("memberchk", [
@@ -346,7 +347,6 @@ var pl;
         )
       ]
     }
-    return { predicates, exports }
   }
 
   
