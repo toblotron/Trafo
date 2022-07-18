@@ -349,6 +349,13 @@ var pl;
     // List of predicates exported by the module
     var exports = [
         "digit/3",
+        "string_without/4",
+        "list_string_without/4",
+        "string/3",
+        "blanks/2",
+        "blank/2",
+        "eol/2",
+        "eos/2",
         "memberchk/2",
         "code_type/2"
     ];
