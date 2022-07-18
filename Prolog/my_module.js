@@ -343,6 +343,58 @@ var pl;
           ]),
           null
         )
+      ],
+      'sequence/4': [
+        new pl.type.Rule(
+          new pl.type.Term('sequence', [
+            new pl.type.Var('_1'),
+            new pl.type.Var('_2'),
+            new pl.type.Var('_3'),
+            new pl.type.Var('_4')
+          ]),
+          new pl.type.Term('sequence_', [
+            new pl.type.Var('_2'),
+            new pl.type.Var('_1'),
+            new pl.type.Var('_3'),
+            new pl.type.Var('_4')
+          ])
+        )
+      ],
+      'sequence_/4': [
+        new pl.type.Rule(
+          new pl.type.Term('sequence_', [
+            new pl.type.Term('.', [
+              new pl.type.Var('_5'),
+              new pl.type.Var('_6')
+            ]),
+            new pl.type.Var('_7'),
+            new pl.type.Var('_8'),
+            new pl.type.Var('_10')
+          ]),
+          new pl.type.Term(',', [
+            new pl.type.Term('call', [
+              new pl.type.Var('_7'),
+              new pl.type.Var('_5'),
+              new pl.type.Var('_8'),
+              new pl.type.Var('_9')
+            ]),
+            new pl.type.Term('sequence_', [
+              new pl.type.Var('_6'),
+              new pl.type.Var('_7'),
+              new pl.type.Var('_9'),
+              new pl.type.Var('_10')
+            ])
+          ])
+        ),
+        new pl.type.Rule(
+          new pl.type.Term('sequence_', [
+            new pl.type.Term('[]', []),
+            new pl.type.Var('__11'),
+            new pl.type.Var('_12'),
+            new pl.type.Var('_12')
+          ]),
+          new pl.type.Term('true', [])
+        )
       ]
     }
   };
@@ -357,7 +409,8 @@ var pl;
         "eol/2",
         "eos/2",
         "memberchk/2",
-        "code_type/2"
+        "code_type/2",
+        "sequence/4"
     ];
     // DON'T EDIT
     if( typeof module !== 'undefined' ) {
