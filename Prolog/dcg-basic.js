@@ -1,10 +1,8 @@
 var pl;
 (function( pl ) {
     // Name of the module
-  var name = "dcg_basics"
-
-  
-    // Compiled using build.js
+    var name = 'dcg-basic';
+    // Object with the set of predicates, indexed by indicators (name/arity)
     var predicates = function() {
         return {
       "memberchk/2": [
@@ -345,25 +343,82 @@ var pl;
           ]),
           null
         )
+      ],
+      'sequence/4': [
+        new pl.type.Rule(
+          new pl.type.Term('sequence', [
+            new pl.type.Var('_1'),
+            new pl.type.Var('_2'),
+            new pl.type.Var('_3'),
+            new pl.type.Var('_4')
+          ]),
+          new pl.type.Term('sequence_', [
+            new pl.type.Var('_2'),
+            new pl.type.Var('_1'),
+            new pl.type.Var('_3'),
+            new pl.type.Var('_4')
+          ])
+        )
+      ],
+      'sequence_/4': [
+        new pl.type.Rule(
+          new pl.type.Term('sequence_', [
+            new pl.type.Term('.', [
+              new pl.type.Var('_5'),
+              new pl.type.Var('_6')
+            ]),
+            new pl.type.Var('_7'),
+            new pl.type.Var('_8'),
+            new pl.type.Var('_10')
+          ]),
+          new pl.type.Term(',', [
+            new pl.type.Term('call', [
+              new pl.type.Var('_7'),
+              new pl.type.Var('_5'),
+              new pl.type.Var('_8'),
+              new pl.type.Var('_9')
+            ]),
+            new pl.type.Term('sequence_', [
+              new pl.type.Var('_6'),
+              new pl.type.Var('_7'),
+              new pl.type.Var('_9'),
+              new pl.type.Var('_10')
+            ])
+          ])
+        ),
+        new pl.type.Rule(
+          new pl.type.Term('sequence_', [
+            new pl.type.Term('[]', []),
+            new pl.type.Var('__11'),
+            new pl.type.Var('_12'),
+            new pl.type.Var('_12')
+          ]),
+          new pl.type.Term('true', [])
+        )
       ]
     }
-  }
-
-  
-  // List of predicates exported by the module
+  };
+    // List of predicates exported by the module
     var exports = [
         "digit/3",
+        "string_without/4",
+        "list_string_without/4",
+        "string/3",
+        "blanks/2",
+        "blank/2",
+        "eol/2",
+        "eos/2",
         "memberchk/2",
-        "code_type/2"
+        "code_type/2",
+        "sequence/4"
     ];
-    
-  // DON'T EDIT
-  if( typeof module !== 'undefined' ) {
-    module.exports = function(tau_prolog) {
-        pl = tau_prolog;
-        new pl.type.Module( name, predicates(), exports );
-    };
-} else {
-    new pl.type.Module( name, predicates(), exports );
-}
-})(pl)
+    // DON'T EDIT
+    if( typeof module !== 'undefined' ) {
+        module.exports = function(tau_prolog) {
+            pl = tau_prolog;
+            new pl.type.Module( name, predicates(), exports, { dependencies: ["lists"] } );
+        };
+    } else {
+        new pl.type.Module( name, predicates(), exports, { dependencies: ["lists"] } );
+    }
+})( pl );
